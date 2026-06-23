@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { LanguageProvider } from "./context/LanguageContext";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -11,29 +10,28 @@ import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
 function App() {
-  // حالة التحكم بعرض الداشبورد والشات
-  const [showDashboard, setShowDashboard] = useState(false);
+  // فحص إذا كان الرابط في المتصفح يحتوي على كلمة dashboard
+  const isDashboardRoute = window.location.pathname.includes('/dashboard');
 
   return (
     <LanguageProvider>
       <div className="bg-[#050816] text-white min-h-screen overflow-x-hidden">
-        {/* نمرر الدالة للـ Navbar والـ Hero حتى يفتحوا الشات عند الضغط على الأزرار */}
-        <Navbar onNavigate={() => setShowDashboard(false)} onStartLearning={() => setShowDashboard(true)} />
+        <Navbar />
         
-        {showDashboard ? (
-          // إذا ضغط المستخدم على الزر، تظهر لوحة التحكم والشات الذكي فوراً
-          <div className="py-20 animate-fade-in">
+        {isDashboardRoute ? (
+          // إذا كان الرابط /dashboard، اعرض الشات والداشبورد فوراً
+          <div className="py-20">
             <Dashboard />
           </div>
         ) : (
-          // الصفحة الرئيسية العادية
+          // إذا كان الرابط العادي، اعرض الصفحة التعريفية
           <>
-            <Hero onStartLearning={() => setShowDashboard(true)} />
+            <Hero />
             <Stats />
             <Features />
             <HowItWorks />
             <Testimonials />
-            <CTA onStartLearning={() => setShowDashboard(true)} />
+            <CTA />
           </>
         )}
         
