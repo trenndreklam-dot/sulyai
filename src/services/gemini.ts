@@ -1,8 +1,6 @@
 import { GoogleGenAI } from '@google/genai';
 
-// هنا نضع مفتاح الـ API الخاص بك لتشغيل الذكاء الاصطناعي
-// يمكنك الحصول على مفتاح مجاني فوراً من موقع Google AI Studio
-const ai = new GoogleGenAI({ apiKey: "AQ.Ab8RN6L6pnTjvhm_uLqvPEdCrJw7xrrCGW-y9_WMsxzL6tx0EA" });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
 
 export async function askSulyAI(prompt: string): Promise<string> {
   try {
